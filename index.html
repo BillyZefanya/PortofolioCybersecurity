@@ -1,756 +1,543 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Billy Zefanya — Cybersecurity Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<canvas id="matrix-canvas"></canvas>
-<div class="cursor" id="cursor"></div>
-<div class="cursor-trail" id="cursor-trail"></div>
+  <!-- TERMINAL CURSOR OVERLAY -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="scan-line"></div>
+  <div class="noise-overlay"></div>
 
-<!-- ═══════════════════════════════════
-     NAVIGATION
-════════════════════════════════════ -->
-<nav>
-  <div class="nav-logo">Billy<span>_</span>Zefanya</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#timeline">Timeline</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+  <!-- NAVIGATION -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-logo">
+      <span class="nav-bracket">[</span>BZ<span class="nav-bracket">]</span>
+      <span class="nav-title">CYBER<span class="accent">SEC</span></span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home" class="nav-link active" data-section="home">HOME</a></li>
+      <li><a href="#about" class="nav-link" data-section="about">ABOUT</a></li>
+      <li><a href="#projects" class="nav-link" data-section="projects">PROJECTS</a></li>
+      <li><a href="#contact" class="nav-link" data-section="contact">CONTACT</a></li>
+    </ul>
+    <div class="nav-status">
+      <span class="status-dot online"></span>
+      <span class="status-text">SECURE CONNECTION</span>
+    </div>
+  </nav>
 
-<!-- ═══════════════════════════════════
-     HERO
-════════════════════════════════════ -->
-<section id="hero">
-  <div class="hero-inner">
+  <!-- ============ HERO SECTION ============ -->
+  <section class="hero" id="home">
+    <div class="hero-grid-bg"></div>
+    <div class="hex-pattern"></div>
 
     <div class="hero-content">
-      <div class="hero-tag">Cybersecurity Portfolio</div>
-      <h1 class="glitch">Billy<span>Zefanya</span></h1>
-      <div class="hero-subtitle">Penetration Testing | Threat Hunting</div>
-      <p class="hero-desc">
-        Mahasiswa Ilmu Komputer dengan fokus pada bidang keamanan siber, memiliki pengalaman
-        dalam pengujian penetrasi aplikasi web dan analisis insiden keamanan berbasis SIEM.
-      </p>
-      <div class="hero-btns">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="#contact"  class="btn btn-outline">Contact Me</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Projects</div></div>
-        <div class="stat"><div class="stat-num">8</div><div class="stat-label">Findings</div></div>
-        <div class="stat"><div class="stat-num">CPTS</div><div class="stat-label">Preparation</div></div>
-      </div>
-    </div>
-
-    <!-- PROFILE PHOTO — sistem sama dgn foto findings (contain/cover toggle + drag) -->
-    <div class="hero-photo-wrap">
-      <div class="hero-photo-frame">
-        <div class="photo-border">
-          <div class="corner corner-tl"></div>
-          <div class="corner corner-tr"></div>
-          <div class="corner corner-bl"></div>
-          <div class="corner corner-br"></div>
+      <div class="terminal-window">
+        <div class="terminal-bar">
+          <span class="t-btn red"></span>
+          <span class="t-btn yellow"></span>
+          <span class="t-btn green"></span>
+          <span class="t-title">terminal — zsh</span>
         </div>
-        <div class="photo-inner">
-          <div class="photo-slot-wrap">
-            <!--
-              ╔══════════════════════════════════════╗
-              ║  SLOT FOTO PROFIL                    ║
-              ║  Ganti src="" → src="billy.jpg"      ║
-              ║  Tombol ⊡/⊞ muncul di kiri bawah    ║
-              ╚══════════════════════════════════════╝
-            -->
-            <img id="profile-img" src="billy.jpg" alt="Billy Zefanya" style="display:none;"/>
+        <div class="terminal-body">
+          <p class="t-line"><span class="t-prompt">root@srv ~$</span> <span class="t-typed" id="typedLine1"></span></p>
+          <p class="t-line hidden" id="tLine2"><span class="t-prompt">root@srv ~$</span> <span class="t-cmd">./load_profile.sh <span class="t-arg">--operator</span> billy</span></p>
+          <div class="t-output hidden" id="tOutput">
+            <p><span class="t-green">✓</span> Operator: <span class="accent">Billy Zefanya</span></p>
+            <p><span class="t-green">✓</span> Role: <span class="accent">Penetration Tester</span> / <span class="accent2">Incident Analyst</span></p>
+            <p><span class="t-green">✓</span> Status: <span class="t-green blink-text">ACTIVE</span></p>
           </div>
-          <div class="photo-ph">
-            <div class="photo-ph-icon">👤</div>
+        </div>
+      </div>
+
+      <div class="hero-text">
+        <p class="hero-subtitle">CYBERSECURITY PORTFOLIO</p>
+        <h1 class="hero-name">BILLY<br/><span class="hero-name-accent">ZEFANYA</span></h1>
+        <p class="hero-tagline">Penetration Testing <span class="divider">|</span> Incident Analysis</p>
+        <p class="hero-desc">Computer Science student at Universitas Pertamina with hands-on experience in web application pentesting and SIEM-based incident analysis. Skilled in both offensive and defensive security operations.</p>
+
+        <!-- TEAM SELECTOR -->
+        <div class="team-selector" id="teamSelector">
+          <p class="selector-label">SELECT YOUR VIEW</p>
+          <div class="team-cards">
+            <button class="team-card red-team" id="btnRedTeam" onclick="selectTeam('red')">
+              <div class="team-card-icon">⚔</div>
+              <div class="team-card-info">
+                <span class="team-card-tag">OFFENSIVE</span>
+                <span class="team-card-name">RED TEAM</span>
+                <span class="team-card-desc">Web App Pentesting · Exploitation · Vulnerability Assessment</span>
+              </div>
+              <div class="team-card-arrow">→</div>
+            </button>
+            <button class="team-card blue-team" id="btnBlueTeam" onclick="selectTeam('blue')">
+              <div class="team-card-icon">🛡</div>
+              <div class="team-card-info">
+                <span class="team-card-tag">DEFENSIVE</span>
+                <span class="team-card-name">BLUE TEAM</span>
+                <span class="team-card-desc">Incident Response · SIEM Analysis · Threat Hunting</span>
+              </div>
+              <div class="team-card-arrow">→</div>
+            </button>
           </div>
-          <button class="photo-toggle-btn">⊡ CONTAIN</button>
-        </div>
-        <div class="photo-scan"></div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════
-     ABOUT
-════════════════════════════════════ -->
-<section id="about">
-  <div class="section-header">
-    <span class="section-num">01</span>
-    <h2 class="section-title">About Me</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="about-grid">
-
-    <div class="about-left">
-      <div class="about-cyber-img">
-        <!--
-          ╔══════════════════════════════════════╗
-          ║  SLOT FOTO CYBER (About Section)     ║
-          ║  Ganti src="" → src="cyber.jpg"      ║
-          ╚══════════════════════════════════════╝
-        -->
-        <img id="cyber-img" src="cyber.jpg" alt="Cyber Security" style="display:none;"/>
-        <div class="img-ph">
-          <div style="font-size:32px;opacity:.2;">🔒</div>
-          <span>SLOT FOTO CYBER — ganti src="cyber.jpg" di atas</span>
-        </div>
-      </div>
-      <div class="about-text">
-        <p>Mahasiswa Ilmu Komputer dengan fokus pada bidang keamanan siber, memiliki pengalaman
-          dalam pengujian penetrasi aplikasi web dan analisis insiden keamanan berbasis SIEM.</p>
-        <p>Berpengalaman menggunakan berbagai tools keamanan untuk mengidentifikasi kerentanan,
-          melakukan eksploitasi secara etis, serta menganalisis aktivitas serangan pada sistem.</p>
-        <p>Memiliki minat dalam bidang Offensive Security dan Defensive Security dengan tujuan
-          menjadi profesional keamanan siber yang mampu melindungi sistem dari ancaman nyata.</p>
-      </div>
-    </div>
-
-    <div class="info-cards">
-      <div class="info-card">
-        <div class="info-card-label">Education</div>
-        <div class="info-card-value">Universitas Pertamina</div>
-        <div class="info-card-sub">Ilmu Komputer</div>
-      </div>
-      <div class="info-card">
-        <div class="info-card-label">Bootcamp</div>
-        <div class="info-card-value">Cyber Security Bootcamp</div>
-        <div class="info-card-sub">Dibimbing.id</div>
-      </div>
-      <div class="info-card">
-        <div class="info-card-label">Certification</div>
-        <div class="info-card-value">HTB CPTS Preparation</div>
-        <div class="info-card-sub">Hack The Box</div>
-      </div>
-      <div class="info-card">
-        <div class="info-card-label">Focus Area</div>
-        <div class="info-card-value">Offensive &amp; Defensive Security</div>
-        <div class="info-card-sub">Red Team · Blue Team</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════
-     SKILLS
-════════════════════════════════════ -->
-<section id="skills">
-  <div class="skills-inner">
-    <div class="section-header">
-      <span class="section-num">02</span>
-      <h2 class="section-title">Experience Related Field</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="skills-grid">
-
-      <div class="skill-cat">
-        <div class="skill-cat-title"><div class="dot"></div>Offensive Security</div>
-        <div class="skill-item"><div class="skill-name"><span>Pengujian Penetrasi Web App</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="85"></div></div></div>
-        <div class="skill-item"><div class="skill-name"><span>SQL Injection</span><span class="skill-pct">82%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="82"></div></div></div>
-        <div class="skill-item"><div class="skill-name"><span>Cross-Site Scripting (XSS)</span><span class="skill-pct">78%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="78"></div></div></div>
-        <div class="skill-item"><div class="skill-name"><span>Penilaian Kerentanan Sistem</span><span class="skill-pct">80%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="80"></div></div></div>
-      </div>
-
-      <div class="skill-cat">
-        <div class="skill-cat-title"><div class="dot"></div>Defensive Security</div>
-        <div class="skill-item"><div class="skill-name"><span>Investigasi Insiden Keamanan</span><span class="skill-pct">78%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="78"></div></div></div>
-        <div class="skill-item"><div class="skill-name"><span>Deteksi Ancaman &amp; Log Analysis</span><span class="skill-pct">80%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="80"></div></div></div>
-        <div class="skill-item"><div class="skill-name"><span>SIEM Monitoring (Wazuh)</span><span class="skill-pct">78%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="78"></div></div></div>
-        <div class="skill-item"><div class="skill-name"><span>Threat Hunting</span><span class="skill-pct">75%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="75"></div></div></div>
-      </div>
-
-      <div class="skill-cat">
-        <div class="skill-cat-title"><div class="dot"></div>Tools &amp; Technologies</div>
-        <div class="skill-item"><div class="skill-name"><span>Kali Linux</span><span class="skill-pct">88%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="88"></div></div></div>
-        <div class="skill-item"><div class="skill-name"><span>Burp Suite</span><span class="skill-pct">80%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="80"></div></div></div>
-        <div class="skill-item"><div class="skill-name"><span>Nmap · SQLmap</span><span class="skill-pct">82%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="82"></div></div></div>
-        <div class="skill-item"><div class="skill-name"><span>Linux CLI</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="85"></div></div></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════
-     PROJECTS
-════════════════════════════════════ -->
-<section id="projects">
-  <div class="section-header">
-    <span class="section-num">03</span>
-    <h2 class="section-title">Overview Projects</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="projects-grid">
-
-    <div class="project-card" onclick="openModal('modal-p1')">
-      <div class="project-header">
-        <span class="project-badge badge-red">Red Team</span>
-        <span class="project-num">01</span>
-      </div>
-      <div class="project-body">
-        <div class="project-title">Web Application Penetration Testing</div>
-        <div class="project-period">11 – 24 Januari 2025 · Dibimbing Shop</div>
-        <p class="project-desc">
-          Mengidentifikasi kerentanan keamanan pada aplikasi web Dibimbing Shop menggunakan
-          metode black-box berdasarkan metodologi OWASP WSTG v4.2. Ditemukan 4 kerentanan
-          termasuk SQL Injection, Stored XSS, dan Git Repository Disclosure.
-        </p>
-        <div class="project-click-hint">KLIK UNTUK DETAIL &amp; SCREENSHOT</div>
-        <div class="project-tools">
-          <span class="tool-tag">Kali Linux</span>
-          <span class="tool-tag">Burp Suite</span>
-          <span class="tool-tag">SQLmap</span>
-          <span class="tool-tag">Nmap</span>
-          <span class="tool-tag">OWASP WSTG</span>
         </div>
       </div>
     </div>
 
-    <div class="project-card" onclick="openModal('modal-p2')">
-      <div class="project-header">
-        <span class="project-badge badge-blue">Blue Team</span>
-        <span class="project-num">02</span>
+    <div class="hero-scroll-hint">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT SECTION ============ -->
+  <section class="section about-section" id="about">
+    <div class="section-label">// 01. ABOUT</div>
+    <div class="about-grid">
+      <div class="about-photo-col">
+        <div class="photo-frame">
+          <!-- PROFILE PHOTO — ganti src dengan path foto Anda -->
+          <img src="billy.jpg" alt="Billy Zefanya" class="profile-photo" id="profilePhoto" onerror="this.style.display='none'; document.getElementById('photoPlaceholder').style.display='flex'"/>
+          <div class="photo-placeholder" id="photoPlaceholder">
+            <span class="photo-icon">◈</span>
+            <span class="photo-hint">[ Ganti src foto di index.html ]</span>
+          </div>
+          <div class="photo-corner tl"></div>
+          <div class="photo-corner tr"></div>
+          <div class="photo-corner bl"></div>
+          <div class="photo-corner br"></div>
+          <div class="photo-scan"></div>
+        </div>
+        <!-- CYBER SECURITY THEME IMAGE -->
+        <div class="cyber-theme-img">
+          <img src="cyber.jpg" alt="Cybersecurity" class="cyber-img" />
+          <div class="cyber-img-overlay">
+            <span class="cyber-img-label">[ CYBER DEFENSE ]</span>
+          </div>
+        </div>
       </div>
-      <div class="project-body">
-        <div class="project-title">Security Incident Analysis &amp; Threat Hunting</div>
-        <div class="project-period">22 Februari – 7 Maret 2025 · Linux Server</div>
-        <p class="project-desc">
-          Analisis insiden keamanan pada server Linux publik menggunakan Threat Hunting dan
-          SIEM Wazuh. Teridentifikasi brute force SSH, akses tidak sah, eskalasi hak akses,
-          serta indikasi persistence melalui korelasi log dan event reconstruction.
-        </p>
-        <div class="project-click-hint">KLIK UNTUK DETAIL &amp; SCREENSHOT</div>
-        <div class="project-tools">
-          <span class="tool-tag">Wazuh SIEM</span>
-          <span class="tool-tag">Linux CLI</span>
-          <span class="tool-tag">Log Analysis</span>
-          <span class="tool-tag">Threat Hunting</span>
+      <div class="about-info-col">
+        <h2 class="section-title">ABOUT <span class="accent">ME</span></h2>
+        <p class="about-bio">Computer Science student with a strong focus on cybersecurity. Experienced in web application penetration testing and incident analysis using SIEM tools. Proficient in identifying vulnerabilities, conducting ethical exploitation, and analyzing attack activities across both offensive and defensive security domains.</p>
+
+        <div class="info-grid">
+          <div class="info-block">
+            <span class="info-label">EDUCATION</span>
+            <span class="info-value">Universitas Pertamina</span>
+            <span class="info-sub">Computer Science</span>
+          </div>
+          <div class="info-block">
+            <span class="info-label">TRAINING</span>
+            <span class="info-value">Cyber Security Bootcamp</span>
+            <span class="info-sub">Dibimbing.id</span>
+          </div>
+          <div class="info-block">
+            <span class="info-label">CERTIFICATION</span>
+            <span class="info-value">HTB CPTS</span>
+            <span class="info-sub">In Preparation</span>
+          </div>
+          <div class="info-block">
+            <span class="info-label">FOCUS AREA</span>
+            <span class="info-value">Offensive + Defensive</span>
+            <span class="info-sub">Security Operations</span>
+          </div>
+        </div>
+
+        <div class="skills-block">
+          <span class="info-label">TOOLS & SKILLS</span>
+          <div class="skill-tags">
+            <span class="skill-tag red-tag">Kali Linux</span>
+            <span class="skill-tag red-tag">Burp Suite</span>
+            <span class="skill-tag red-tag">SQLmap</span>
+            <span class="skill-tag red-tag">Nmap</span>
+            <span class="skill-tag blue-tag">Wazuh SIEM</span>
+            <span class="skill-tag blue-tag">Log Analysis</span>
+            <span class="skill-tag blue-tag">Threat Hunting</span>
+            <span class="skill-tag neutral-tag">OWASP WSTG</span>
+            <span class="skill-tag neutral-tag">Linux CLI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS SECTION ============ -->
+  <section class="section projects-section" id="projects">
+    <div class="section-label">// 02. PROJECTS</div>
+    <h2 class="section-title center">OPERATIONAL <span class="accent">REPORTS</span></h2>
+    <p class="section-subtitle center">Select a team role above, or use the tabs below to navigate.</p>
+
+    <!-- TEAM TABS -->
+    <div class="project-tabs" id="projectTabs">
+      <button class="tab-btn active-red" id="tabRed" onclick="switchTab('red')">
+        <span class="tab-icon">⚔</span> RED TEAM — Offensive
+      </button>
+      <button class="tab-btn" id="tabBlue" onclick="switchTab('blue')">
+        <span class="tab-icon">🛡</span> BLUE TEAM — Defensive
+      </button>
+    </div>
+
+    <!-- ---- RED TEAM CONTENT ---- -->
+    <div class="team-content" id="redContent">
+      <div class="project-header-card red">
+        <div class="phc-badge">PROJECT 01</div>
+        <div class="phc-info">
+          <h3>Web Application Penetration Testing</h3>
+          <p>Black-box + Grey-box assessment of Dibimbing Shop e-commerce platform using OWASP WSTG methodology. Identified and documented critical vulnerabilities with full proof-of-concept exploitation.</p>
+        </div>
+        <div class="phc-meta">
+          <span class="meta-tag">OWASP WSTG</span>
+          <span class="meta-tag">Red Team</span>
+          <span class="meta-tag">Lab Env</span>
+        </div>
+      </div>
+
+      <div class="findings-grid">
+        <!-- Finding 1 -->
+        <div class="finding-card critical">
+          <div class="finding-header">
+            <span class="finding-id">WAPT-01</span>
+            <span class="severity-badge critical-badge">CRITICAL</span>
+          </div>
+          <h4 class="finding-title">SQL Injection — cart.php</h4>
+          <p class="finding-desc">SQL Injection discovered on the coupon code parameter in cart.php. Exploited via SQLmap to extract database contents. MySQL error exposed stack traces confirming injectable endpoint.</p>
+          <div class="finding-evidence">
+            <!-- Ganti src dengan screenshot SQLi Anda -->
+            <div class="evidence-frame">
+              <div class="evidence-header">
+                <span class="e-dot red-e"></span>
+                <span class="e-title">WAPT-01 :: Proof of Concept</span>
+              </div>
+              <img src="p1-sqli.jpg"SQL Injection PoC" class="evidence-img" onerror="this.parentElement.innerHTML+='<div class=\'img-placeholder\'><span>[ Ganti RED_TEAM_SQLI_SCREENSHOT.png ]</span></div>'; this.style.display=\'none\'" />
+            </div>
+          </div>
+          <div class="finding-remediation">
+            <span class="rem-label">REMEDIATION</span>
+            <span class="rem-text">Prepared Statements + Strict Input Validation</span>
+          </div>
+        </div>
+
+        <!-- Finding 2 -->
+        <div class="finding-card critical">
+          <div class="finding-header">
+            <span class="finding-id">WAPT-02</span>
+            <span class="severity-badge critical-badge">CRITICAL</span>
+          </div>
+          <h4 class="finding-title">Hardcoded Credentials (.env Exposure)</h4>
+          <p class="finding-desc">Admin credentials hardcoded in source code due to absence of environment variable configuration. Credentials discovered via exposed Git repository, granting full admin access.</p>
+          <div class="finding-evidence">
+            <div class="evidence-frame">
+              <div class="evidence-header">
+                <span class="e-dot red-e"></span>
+                <span class="e-title">WAPT-02 :: Proof of Concept</span>
+              </div>
+              <img src="p1-creds.jpg" alt="Hardcoded Credentials PoC" class="evidence-img" onerror="this.parentElement.innerHTML+='<div class=\'img-placeholder\'><span>[ Ganti RED_TEAM_HARDCODED_SCREENSHOT.png ]</span></div>'; this.style.display=\'none\'" />
+            </div>
+          </div>
+          <div class="finding-remediation">
+            <span class="rem-label">REMEDIATION</span>
+            <span class="rem-text">Environment Variables + Credential Rotation</span>
+          </div>
+        </div>
+
+        <!-- Finding 3 -->
+        <div class="finding-card high">
+          <div class="finding-header">
+            <span class="finding-id">WAPT-03</span>
+            <span class="severity-badge high-badge">HIGH</span>
+          </div>
+          <h4 class="finding-title">Stored XSS — Admin Panel Product URL</h4>
+          <p class="finding-desc">Stored Cross-Site Scripting vulnerability found in the Product URL field within the admin panel. Malicious payload persists and executes in victim browsers, enabling session hijacking.</p>
+          <div class="finding-evidence">
+            <div class="evidence-frame">
+              <div class="evidence-header">
+                <span class="e-dot yellow-e"></span>
+                <span class="e-title">WAPT-03 :: Proof of Concept</span>
+              </div>
+              <img src="p1-xss.jpg" alt="Stored XSS PoC" class="evidence-img" onerror="this.parentElement.innerHTML+='<div class=\'img-placeholder\'><span>[ Ganti RED_TEAM_XSS_SCREENSHOT.png ]</span></div>'; this.style.display=\'none\'" />
+            </div>
+          </div>
+          <div class="finding-remediation">
+            <span class="rem-label">REMEDIATION</span>
+            <span class="rem-text">Input Sanitization + Output Encoding + CSP Headers</span>
+          </div>
+        </div>
+
+        <!-- Finding 4 -->
+        <div class="finding-card high">
+          <div class="finding-header">
+            <span class="finding-id">WAPT-04</span>
+            <span class="severity-badge high-badge">HIGH</span>
+          </div>
+          <h4 class="finding-title">Exposed Git Repository (.git Directory)</h4>
+          <p class="finding-desc">The .git directory is publicly accessible via the web root, exposing the full source code history, configuration files, and potentially sensitive commit data to unauthenticated users.</p>
+          <div class="finding-evidence">
+            <div class="evidence-frame">
+              <div class="evidence-header">
+                <span class="e-dot yellow-e"></span>
+                <span class="e-title">WAPT-04 :: Proof of Concept</span>
+              </div>
+              <img src="p1-git.jpg" alt="Git Exposure PoC" class="evidence-img" onerror="this.parentElement.innerHTML+='<div class=\'img-placeholder\'><span>[ Ganti RED_TEAM_GIT_SCREENSHOT.png ]</span></div>'; this.style.display=\'none\'" />
+            </div>
+          </div>
+          <div class="finding-remediation">
+            <span class="rem-label">REMEDIATION</span>
+            <span class="rem-text">Block .git Access via Web Server Rules + Remove from Web Root</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Red Team Summary -->
+      <div class="summary-card red-summary">
+        <div class="summary-col">
+          <span class="summary-num critical-color">2</span>
+          <span class="summary-label">CRITICAL</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-col">
+          <span class="summary-num high-color">2</span>
+          <span class="summary-label">HIGH</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-col">
+          <span class="summary-num">4</span>
+          <span class="summary-label">TOTAL FINDINGS</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-tools">
+          <span class="summary-label">TOOLS USED</span>
+          <div class="summary-tags">
+            <span class="s-tag">Kali Linux</span>
+            <span class="s-tag">Burp Suite</span>
+            <span class="s-tag">SQLmap</span>
+            <span class="s-tag">Nmap</span>
+          </div>
         </div>
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════
-     MODAL — PROJECT 1 (RED TEAM)
-════════════════════════════════════════════════════ -->
-<div class="modal-overlay" id="modal-p1">
-  <div class="modal">
-    <div class="modal-topbar">
-      <span class="modal-topbar-title">PROJECT 1 — WEB APPLICATION PENETRATION TESTING</span>
-      <button class="modal-close-btn" onclick="closeModal('modal-p1')">[ CLOSE × ]</button>
-    </div>
-    <div class="modal-inner">
-
-      <span class="modal-badge badge-red">Red Team</span>
-      <div class="modal-title">Web Application Penetration Testing</div>
-      <div class="modal-period">Periode: 11 – 24 Januari 2025 &nbsp;·&nbsp; Target: Dibimbing Shop &nbsp;·&nbsp; Metode: OWASP WSTG v4.2</div>
-
-      <!-- 4 FOTO — 2×2 GRID -->
-      <span class="modal-section-label">Screenshots &amp; Evidence</span>
-      <div class="modal-img-grid">
-
-        <!-- FOTO #1 — WAPT-01 -->
-        <div class="modal-img-slot">
-          <div class="slot-img-wrap">
-            <!--
-              Ganti src="" → src="p1-sqli.jpg"
-              (screenshot Burp Suite / SQLmap output)
-            -->
-            <img src="p1-sqli.jpg" alt="WAPT-01 SQL Injection"/>
-          </div>
-          <div class="slot-ph">
-            <div class="slot-ph-icon">💉</div>
-            <div class="slot-ph-label">SLOT FOTO #1 — WAPT-01<br>SQL Injection<br><em>ganti src="" di atas</em></div>
-          </div>
-          <button class="img-toggle-btn">⊡ CONTAIN</button>
-          <div class="resize-hint">↕ resize</div>
-          <div class="modal-img-caption">WAPT-01 — SQL Injection (cart.php · Coupon Code)</div>
+    <!-- ---- BLUE TEAM CONTENT ---- -->
+    <div class="team-content hidden" id="blueContent">
+      <div class="project-header-card blue">
+        <div class="phc-badge blue-badge">PROJECT 02</div>
+        <div class="phc-info">
+          <h3>Security Incident Analysis & Threat Hunting</h3>
+          <p>Blue Team investigation of a compromised Linux server using Wazuh SIEM. Reconstructed full attack timeline from SSH brute force to privilege escalation, with correlated log evidence and actionable remediation.</p>
         </div>
-
-        <!-- FOTO #2 — WAPT-02 -->
-        <div class="modal-img-slot">
-          <div class="slot-img-wrap">
-            <!--
-              Ganti src="p1-creds.jpg" → src="p1-creds.jpg"
-              (screenshot GitHub repo / .env file)
-            -->
-            <img src="p1-creds.jpg" alt="WAPT-02 Hardcoded Credentials"/>
-          </div>
-          <div class="slot-ph">
-            <div class="slot-ph-icon">🔑</div>
-            <div class="slot-ph-label">SLOT FOTO #2 — WAPT-02<br>Hardcoded Credentials<br><em>ganti src="" di atas</em></div>
-          </div>
-          <button class="img-toggle-btn">⊡ CONTAIN</button>
-          <div class="resize-hint">↕ resize</div>
-          <div class="modal-img-caption">WAPT-02 — Hardcoded Credentials (.env · GitHub)</div>
+        <div class="phc-meta">
+          <span class="meta-tag blue-meta">Wazuh SIEM</span>
+          <span class="meta-tag blue-meta">Blue Team</span>
+          <span class="meta-tag blue-meta">Threat Hunting</span>
         </div>
-
-        <!-- FOTO #3 — WAPT-03 -->
-        <div class="modal-img-slot">
-          <div class="slot-img-wrap">
-            <!--
-              Ganti src="" → src="p1-xss.jpg"
-              (screenshot XSS Hunter / Admin Panel)
-            -->
-            <img src="p1-xss.jpg" alt="WAPT-03 Stored XSS"/>
-          </div>
-          <div class="slot-ph">
-            <div class="slot-ph-icon">⚡</div>
-            <div class="slot-ph-label">SLOT FOTO #3 — WAPT-03<br>Stored XSS Admin Panel<br><em>ganti src="" di atas</em></div>
-          </div>
-          <button class="img-toggle-btn">⊡ CONTAIN</button>
-          <div class="resize-hint">↕ resize</div>
-          <div class="modal-img-caption">WAPT-03 — Stored XSS (Admin Panel · Product URL)</div>
-        </div>
-
-        <!-- FOTO #4 — WAPT-04 -->
-        <div class="modal-img-slot">
-          <div class="slot-img-wrap">
-            <!--
-              Ganti src="" → src="p1-git.jpg"
-              (screenshot .git directory / config)
-            -->
-            <img src="p1-git.jpg" alt="WAPT-04 Git Disclosure"/>
-          </div>
-          <div class="slot-ph">
-            <div class="slot-ph-icon">📂</div>
-            <div class="slot-ph-label">SLOT FOTO #4 — WAPT-04<br>Exposed Git Repository<br><em>ganti src="" di atas</em></div>
-          </div>
-          <button class="img-toggle-btn">⊡ CONTAIN</button>
-          <div class="resize-hint">↕ resize</div>
-          <div class="modal-img-caption">WAPT-04 — Exposed .git Directory Disclosure</div>
-        </div>
-
       </div>
 
-      <!-- LATAR BELAKANG -->
-      <span class="modal-section-label">Latar Belakang</span>
-      <div class="modal-desc">
-        Pada periode 11–24 Januari 2025, dilakukan pengujian penetrasi terhadap aplikasi web
-        <strong style="color:#fff">DIBIMBING SHOP</strong> dalam lingkungan laboratorium
-        Cyber Security Bootcamp Dibimbing.id. Pengujian menggunakan metode black-box testing
-        berdasarkan OWASP WSTG v4.2 untuk mengidentifikasi dan memvalidasi kerentanan keamanan
-        pada sisi user dan admin. Audit ini bertujuan melindungi data sensitif pelanggan,
-        mencegah manipulasi transaksi, dan mengidentifikasi risiko bisnis akibat eksploitasi kerentanan.
-      </div>
-
-      <!-- SCOPE & OBJECTIVE -->
-      <span class="modal-section-label">Scope &amp; Objective</span>
-      <div class="modal-desc">
-        <strong style="color:#fff">Ruang Lingkup:</strong> Fitur pengguna (guest / unauthenticated user), panel administrator (authenticated user), validasi input dan output aplikasi, mekanisme autentikasi dan manajemen sesi, serta kontrol keamanan fitur administratif.<br><br>
-        <strong style="color:#fff">Fokus:</strong> Identifikasi dan validasi kerentanan aplikasi web dari perspektif Red Team menggunakan pendekatan black-box dan grey-box sesuai Rules of Engagement.
-      </div>
-
-      <!-- MAIN FINDINGS -->
-      <div class="modal-findings">
-        <span class="modal-section-label">Main Findings</span>
-
-        <div class="modal-finding-item">
-          <span class="finding-sev sev-critical">Critical</span>
-          <div class="finding-info">
-            <div class="finding-name">WAPT-01 — SQL Injection pada cart.php (Parameter Coupon Code)</div>
-            <div class="finding-detail">
-              Injeksi SQL pada parameter coupon di <code>cart.php</code> memungkinkan attacker
-              membaca seluruh isi database server. Error MySQL terekspos langsung di halaman:
-              <em>"You have an error in your SQL syntax..."</em>. Dikonfirmasi menggunakan Burp Suite dan SQLmap.<br>
-              <strong>Mitigasi:</strong> Prepared Statements dan strict input validation.
+      <!-- ATTACK TIMELINE -->
+      <div class="timeline-section">
+        <h4 class="subsection-title"><span class="accent2">// ATTACK TIMELINE</span></h4>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="tl-date">2 Mar 2026 — 09:23</div>
+            <div class="tl-dot blue-dot"></div>
+            <div class="tl-content">
+              <span class="tl-badge">PRIVILEGE ESC</span>
+              <p>Privilege escalation attempt by user <code>www-data</code>. Unauthorized sudo command triggered.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-date">2 Mar 2026 — 09:38</div>
+            <div class="tl-dot blue-dot"></div>
+            <div class="tl-content">
+              <span class="tl-badge">FILE ACCESS</span>
+              <p>Attempted access to sensitive file <code>/etc/shadow</code> from <code>www-data</code> process.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-date">5 Mar 2026</div>
+            <div class="tl-dot orange-dot"></div>
+            <div class="tl-content">
+              <span class="tl-badge alert-badge">BRUTE FORCE</span>
+              <p>Automated SSH brute force attack detected from external IP <code>180.243.121.188</code>. Hundreds of failed login attempts in rapid succession.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-date">6 Mar 2026</div>
+            <div class="tl-dot red-dot"></div>
+            <div class="tl-content">
+              <span class="tl-badge danger-badge">COMPROMISED</span>
+              <p>SSH login succeeded from malicious IP. Attacker gained initial access on limited account <code>analyst</code>, followed by successful root authentication.</p>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="modal-finding-item">
-          <span class="finding-sev sev-critical">Critical</span>
-          <div class="finding-info">
-            <div class="finding-name">WAPT-02 — Hardcoded Credentials (.env Exposure via GitHub)</div>
-            <div class="finding-detail">
-              Kredensial database tersimpan langsung di source code karena tidak menggunakan
-              environment variable. Repository GitHub dapat diakses publik sehingga username,
-              password database, dan konfigurasi sensitif terekspos sepenuhnya.<br>
-              <strong>Mitigasi:</strong> Gunakan environment variables dan hapus credentials dari source code.
+      <div class="findings-grid">
+        <!-- IR Finding 1 -->
+        <div class="finding-card ir-high">
+          <div class="finding-header">
+            <span class="finding-id blue-id">IR-01</span>
+            <span class="severity-badge alert-badge-full">SSH BRUTE FORCE</span>
+          </div>
+          <h4 class="finding-title">Automated SSH Brute Force Attack</h4>
+          <p class="finding-desc">Hundreds of failed SSH login attempts in a short interval from IP 180.243.121.188 targeting the root account. Detected via Wazuh SIEM alert correlation and auth.log analysis.</p>
+          <div class="finding-evidence">
+            <div class="evidence-frame blue-frame">
+              <div class="evidence-header">
+                <span class="e-dot blue-e"></span>
+                <span class="e-title">IR-01 :: SIEM Evidence</span>
+              </div>
+              <img src="p2-bruteforce.jpg" alt="Brute Force Evidence" class="evidence-img" onerror="this.parentElement.innerHTML+='<div class=\'img-placeholder\'><span>[ Ganti BLUE_TEAM_BRUTEFORCE_SCREENSHOT.png ]</span></div>'; this.style.display=\'none\'" />
             </div>
           </div>
+          <div class="finding-remediation blue-rem">
+            <span class="rem-label">MITIGATION</span>
+            <span class="rem-text">Implement fail2ban + SSH Key Authentication</span>
+          </div>
         </div>
 
-        <div class="modal-finding-item">
-          <span class="finding-sev sev-high">High</span>
-          <div class="finding-info">
-            <div class="finding-name">WAPT-03 — Stored Cross-Site Scripting (XSS) di Admin Panel (Product URL)</div>
-            <div class="finding-detail">
-              Stored XSS pada fitur Product URL di Admin Panel. Script berbahaya tersimpan di
-              database dan dieksekusi browser setiap pengguna yang mengakses halaman, berpotensi
-              mencuri session token administrator.<br>
-              <strong>Mitigasi:</strong> Input sanitization, output encoding, dan Content Security Policy (CSP).
+        <!-- IR Finding 2 -->
+        <div class="finding-card ir-high">
+          <div class="finding-header">
+            <span class="finding-id blue-id">IR-02</span>
+            <span class="severity-badge alert-badge-full">INITIAL ACCESS</span>
+          </div>
+          <h4 class="finding-title">Successful SSH Login — Analyst Account</h4>
+          <p class="finding-desc">Attacker obtained initial access to the analyst account after credential brute force. Login confirmed from external IP 180.243.121.188 via auth.log review in SIEM dashboard.</p>
+          <div class="finding-evidence">
+            <div class="evidence-frame blue-frame">
+              <div class="evidence-header">
+                <span class="e-dot blue-e"></span>
+                <span class="e-title">IR-02 :: Authentication Log</span>
+              </div>
+              <img src="p2-login.jpg" alt="Initial Access Evidence" class="evidence-img" onerror="this.parentElement.innerHTML+='<div class=\'img-placeholder\'><span>[ Ganti BLUE_TEAM_ACCESS_SCREENSHOT.png ]</span></div>'; this.style.display=\'none\'" />
             </div>
           </div>
+          <div class="finding-remediation blue-rem">
+            <span class="rem-label">MITIGATION</span>
+            <span class="rem-text">Disable Password Auth + Enforce MFA</span>
+          </div>
         </div>
 
-        <div class="modal-finding-item">
-          <span class="finding-sev sev-high">High</span>
-          <div class="finding-info">
-            <div class="finding-name">WAPT-04 — Exposed Git Repository (.git Directory Disclosure)</div>
-            <div class="finding-detail">
-              Direktori <code>.git</code> dapat diakses publik melalui web browser, mengekspos
-              seluruh source code, history commit, konfigurasi server, dan informasi sensitif.
-              Remote origin mengarah ke repository GitHub publik.<br>
-              <strong>Mitigasi:</strong> Block akses ke direktori sensitif di web server dan hapus .git dari web root.
+        <!-- IR Finding 3 -->
+        <div class="finding-card ir-critical">
+          <div class="finding-header">
+            <span class="finding-id blue-id">IR-03</span>
+            <span class="severity-badge danger-badge-full">PRIVILEGE ESC</span>
+          </div>
+          <h4 class="finding-title">Root Privilege Escalation</h4>
+          <p class="finding-desc">After initial access, attacker escalated privileges to root. Successful root SSH logins confirmed from same malicious IP across multiple sessions on March 3–7, 2026.</p>
+          <div class="finding-evidence">
+            <div class="evidence-frame blue-frame">
+              <div class="evidence-header">
+                <span class="e-dot red-e"></span>
+                <span class="e-title">IR-03 :: Root Access Log</span>
+              </div>
+              <img src="p2-root.jpg"Privilege Escalation Evidence" class="evidence-img" onerror="this.parentElement.innerHTML+='<div class=\'img-placeholder\'><span>[ Ganti BLUE_TEAM_PRIVESC_SCREENSHOT.png ]</span></div>'; this.style.display=\'none\'" />
             </div>
           </div>
+          <div class="finding-remediation blue-rem">
+            <span class="rem-label">MITIGATION</span>
+            <span class="rem-text">Disable Root SSH Login + Principle of Least Privilege</span>
+          </div>
         </div>
 
-      </div>
-
-      <!-- REKOMENDASI -->
-      <span class="modal-section-label">Rekomendasi Keamanan</span>
-      <div class="modal-desc">
-        Meningkatkan kontrol keamanan aplikasi melalui prepared statements dan validasi input ketat.
-        Mengamankan kredensial dengan environment variables dan hashing. Memastikan komunikasi
-        terenkripsi HTTPS/TLS. Memperkuat autentikasi dan manajemen sesi. Melakukan evaluasi
-        keamanan berkala melalui vulnerability assessment dan penetration testing.
-      </div>
-
-      <span class="modal-section-label">Tools &amp; Environment</span>
-      <div class="modal-tools">
-        <span class="tool-tag">Kali Linux</span>
-        <span class="tool-tag">Burp Suite</span>
-        <span class="tool-tag">SQLmap</span>
-        <span class="tool-tag">Nmap</span>
-        <span class="tool-tag">OWASP WSTG v4.2</span>
-        <span class="tool-tag">XSS Hunter</span>
-        <span class="tool-tag">Dibimbing Shop (Lab)</span>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════
-     MODAL — PROJECT 2 (BLUE TEAM)
-     IR-01 Brute Force | IR-02 Successful Login
-     IR-03 Root Access | IR-04 Persistence + Privesc
-════════════════════════════════════════════════════ -->
-<div class="modal-overlay" id="modal-p2">
-  <div class="modal">
-    <div class="modal-topbar">
-      <span class="modal-topbar-title">PROJECT 2 — SECURITY INCIDENT ANALYSIS &amp; THREAT HUNTING</span>
-      <button class="modal-close-btn" onclick="closeModal('modal-p2')">[ CLOSE × ]</button>
-    </div>
-    <div class="modal-inner">
-
-      <span class="modal-badge badge-blue">Blue Team</span>
-      <div class="modal-title">Security Incident Analysis &amp; Threat Hunting</div>
-      <div class="modal-period">Periode: 22 Februari – 7 Maret 2025 &nbsp;·&nbsp; Platform: Wazuh SIEM &nbsp;·&nbsp; Server: Linux Publik</div>
-
-      <!-- 4 FOTO — 2×2 GRID -->
-      <span class="modal-section-label">Screenshots &amp; Evidence</span>
-      <div class="modal-img-grid">
-
-        <!-- FOTO #1 — IR-01: SSH Brute Force -->
-        <div class="modal-img-slot">
-          <div class="slot-img-wrap">
-            <!--
-              Ganti src="" → src="p2-bruteforce.jpg"
-              (screenshot auth.log: Failed password for root)
-            -->
-            <img src="p2-bruteforce.jpg" alt="IR-01 SSH Brute Force"/>
+        <!-- IR Finding 4 -->
+        <div class="finding-card ir-critical">
+          <div class="finding-header">
+            <span class="finding-id blue-id">IR-04</span>
+            <span class="severity-badge danger-badge-full">PERSISTENCE</span>
           </div>
-          <div class="slot-ph">
-            <div class="slot-ph-icon">🔨</div>
-            <div class="slot-ph-label">SLOT FOTO #1 — IR-01<br>SSH Brute Force Log<br><em>ganti src="" di atas</em></div>
-          </div>
-          <button class="img-toggle-btn">⊡ CONTAIN</button>
-          <div class="resize-hint">↕ resize</div>
-          <div class="modal-img-caption">IR-01 — SSH Brute Force Attack (auth.log)</div>
-        </div>
-
-        <!-- FOTO #2 — IR-02: Successful SSH Login (analyst) -->
-        <div class="modal-img-slot">
-          <div class="slot-img-wrap">
-            <!--
-              Ganti src="" → src="p2-login.jpg"
-              (screenshot: Accepted password for analyst)
-            -->
-            <img src="p2-login.jpg" alt="IR-02 Successful SSH Login"/>
-          </div>
-          <div class="slot-ph">
-            <div class="slot-ph-icon">🔓</div>
-            <div class="slot-ph-label">SLOT FOTO #2 — IR-02<br>Successful SSH Login (analyst)<br><em>ganti src="" di atas</em></div>
-          </div>
-          <button class="img-toggle-btn">⊡ CONTAIN</button>
-          <div class="resize-hint">↕ resize</div>
-          <div class="modal-img-caption">IR-02 — Successful Login sebagai Analyst</div>
-        </div>
-
-        <!-- FOTO #3 — IR-03: Root Access -->
-        <div class="modal-img-slot">
-          <div class="slot-img-wrap">
-            <!--
-              Ganti src="" → src="p2-root.jpg"
-              (screenshot: Accepted password for root)
-            -->
-            <img src="p2-root.jpg" alt="IR-03 Root Access"/>
-          </div>
-          <div class="slot-ph">
-            <div class="slot-ph-icon">💀</div>
-            <div class="slot-ph-label">SLOT FOTO #3 — IR-03<br>Root Access Gained<br><em>ganti src="" di atas</em></div>
-          </div>
-          <button class="img-toggle-btn">⊡ CONTAIN</button>
-          <div class="resize-hint">↕ resize</div>
-          <div class="modal-img-caption">IR-03 — Accepted password for root</div>
-        </div>
-
-        <!-- FOTO #4 — IR-04: Persistence + Privilege Escalation attempt -->
-        <div class="modal-img-slot">
-          <div class="slot-img-wrap">
-            <!--
-              Ganti src="" → src="p2-privesc.jpg"
-              (screenshot: sudo www-data + Wazuh dashboard)
-            -->
-            <img src="p2-privesc.jpg" alt="IR-04 Persistence and Privilege Escalation"/>
-          </div>
-          <div class="slot-ph">
-            <div class="slot-ph-icon">📊</div>
-            <div class="slot-ph-label">SLOT FOTO #4 — IR-04<br>Persistence + Privesc Evidence<br><em>ganti src="" di atas</em></div>
-          </div>
-          <button class="img-toggle-btn">⊡ CONTAIN</button>
-          <div class="resize-hint">↕ resize</div>
-          <div class="modal-img-caption">IR-04 — Persistence &amp; Privilege Escalation Attempt</div>
-        </div>
-
-      </div>
-
-      <!-- LATAR BELAKANG -->
-      <span class="modal-section-label">Latar Belakang</span>
-      <div class="modal-desc">
-        Pada periode 22 Februari – 7 Maret 2025, dilakukan analisis insiden keamanan pada
-        server Linux publik dalam lingkungan laboratorium Cyber Security Bootcamp Dibimbing.id.
-        Analisis dilakukan menggunakan pendekatan Threat Hunting dan SIEM Wazuh untuk
-        mengidentifikasi brute force SSH, akses tidak sah, eskalasi hak akses, dan indikasi
-        persistence. Simulasi ini bertujuan memahami bagaimana attacker melakukan password
-        guessing terhadap SSH dan bagaimana aktivitas tersebut dapat dideteksi melalui analisis log.
-      </div>
-
-      <!-- SCOPE & OBJECTIVE -->
-      <span class="modal-section-label">Scope &amp; Objective</span>
-      <div class="modal-desc">
-        <strong style="color:#fff">Ruang Lingkup:</strong> Log autentikasi SSH, log sistem Linux, aktivitas jaringan terkait akses mencurigakan, dan alert keamanan dari SIEM Wazuh. Analisis dilakukan secara forensik menggunakan teknik log correlation dan event reconstruction.<br><br>
-        <strong style="color:#fff">Fokus:</strong> Mengidentifikasi aktivitas brute force, akses tidak sah, dan eskalasi hak akses pada sistem target menggunakan pendekatan Blue Team dan Threat Hunting.
-      </div>
-
-      <!-- MAIN FINDINGS — SESUAI PDF -->
-      <div class="modal-findings">
-        <span class="modal-section-label">Main Findings</span>
-
-        <!-- IR-01 -->
-        <div class="modal-finding-item">
-          <span class="finding-sev sev-critical">Critical</span>
-          <div class="finding-info">
-            <div class="finding-name">IR-01 — SSH Brute Force Attack</div>
-            <div class="finding-detail">
-              Aktivitas brute force terhadap layanan SSH terdeteksi melalui ratusan percobaan
-              login gagal dalam interval waktu singkat. Seluruh percobaan berasal dari IP
-              <strong>180.243.121.188</strong>, pertama terdeteksi pada 4 Maret 2025 pukul 12:04 UTC.
-              Grep pada <code>/var/log/auth.log*</code> menampilkan ratusan entri
-              <em>"Failed password for root from 180.243.121.188"</em>.<br>
-              <strong>Mitigasi:</strong> Implementasi fail2ban, rate limiting SSH, dan blokir IP mencurigakan.
+          <h4 class="finding-title">Suspicious Auth — Potential Persistence</h4>
+          <p class="finding-desc">Evidence of persistence mechanism: www-data attempted sudo to root, accessed /etc/shadow. Recurring root logins suggest attacker established persistent control over the compromised server.</p>
+          <div class="finding-evidence">
+            <div class="evidence-frame blue-frame">
+              <div class="evidence-header">
+                <span class="e-dot red-e"></span>
+                <span class="e-title">IR-04 :: Persistence Indicators</span>
+              </div>
+              <img src="p2-privesc.jpg" alt="Persistence Evidence" class="evidence-img" onerror="this.parentElement.innerHTML+='<div class=\'img-placeholder\'><span>[ Ganti BLUE_TEAM_PERSISTENCE_SCREENSHOT.png ]</span></div>'; this.style.display=\'none\'" />
             </div>
           </div>
-        </div>
-
-        <!-- IR-02 -->
-        <div class="modal-finding-item">
-          <span class="finding-sev sev-critical">Critical</span>
-          <div class="finding-info">
-            <div class="finding-name">IR-02 — Successful SSH Login sebagai Analyst (Akses Awal)</div>
-            <div class="finding-detail">
-              Attacker berhasil memperoleh akses awal pada akun dengan hak akses terbatas
-              (<strong>analyst</strong>) setelah serangkaian percobaan autentikasi. Login berhasil
-              pertama kali pada 6 Maret 2025 pukul 13:29 UTC dari IP <strong>180.243.121.188</strong>.
-              Log menunjukkan beberapa entri <em>"Accepted password for analyst from 180.243.121.188"</em>
-              pada rentang waktu yang berdekatan.<br>
-              <strong>Mitigasi:</strong> Autentikasi SSH key, nonaktifkan password-based login.
-            </div>
+          <div class="finding-remediation blue-rem">
+            <span class="rem-label">MITIGATION</span>
+            <span class="rem-text">Server Hardening + Real-time SIEM Monitoring + Audit</span>
           </div>
         </div>
+      </div>
 
-        <!-- IR-03 -->
-        <div class="modal-finding-item">
-          <span class="finding-sev sev-critical">Critical</span>
-          <div class="finding-info">
-            <div class="finding-name">IR-03 — Eskalasi Hak Akses ke Root (Full System Compromise)</div>
-            <div class="finding-detail">
-              Setelah berhasil login sebagai analyst, attacker berhasil meningkatkan hak akses
-              menjadi <strong>root</strong> pada 6 Maret 2025 pukul 16:31 UTC. Log menunjukkan
-              <em>"Accepted password for root from 180.243.121.188"</em>. Aktivitas root berlanjut
-              hingga 7 Maret 2025 pukul 02:39 UTC, mengindikasikan full system control dan
-              persistence oleh attacker.<br>
-              <strong>Mitigasi:</strong> Nonaktifkan login root langsung via SSH, implementasi Multi-Factor Authentication.
-            </div>
+      <!-- Blue Team Summary -->
+      <div class="summary-card blue-summary">
+        <div class="summary-col">
+          <span class="summary-num blue-color">4</span>
+          <span class="summary-label">INCIDENTS FOUND</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-col">
+          <span class="summary-num accent-color">742</span>
+          <span class="summary-label">TOTAL ALERTS</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-col">
+          <span class="summary-num">597</span>
+          <span class="summary-label">AUTH FAILURES</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-tools">
+          <span class="summary-label">TOOLS USED</span>
+          <div class="summary-tags">
+            <span class="s-tag blue-s-tag">Wazuh SIEM</span>
+            <span class="s-tag blue-s-tag">Linux CLI</span>
+            <span class="s-tag blue-s-tag">Log Analysis</span>
           </div>
         </div>
-
-        <!-- IR-04 -->
-        <div class="modal-finding-item">
-          <span class="finding-sev sev-high">High</span>
-          <div class="finding-info">
-            <div class="finding-name">IR-04 — Aktivitas Autentikasi Mencurigakan: Potensi Persistence &amp; Privilege Escalation</div>
-            <div class="finding-detail">
-              Aktivitas autentikasi mencurigakan menunjukkan potensi persistence dan kontrol penuh
-              terhadap sistem. Ditemukan percobaan eskalasi hak akses pada 7 Maret 2025 pukul 03:15 UTC
-              dengan evidence sebagai berikut:<br><br>
-              • <code>sudo: www-data : user NOT in sudoers ; USER=root COMMAND=/usr/bin/su</code><br>
-              • <code>su[353196]: FAILED SU (to root) www-data</code><br>
-              • <code>sudo: www-data : user NOT in sudoers ; USER=root COMMAND=/usr/bin/less /etc/shadow</code><br><br>
-              Analisis korelasi log melalui Wazuh SIEM pada 7 Maret 07:30 UTC merekonstruksi
-              timeline lengkap: <strong>742 total alerts, 597 authentication failures, 5 authentication successes</strong>.<br>
-              <strong>Mitigasi:</strong> Hardening konfigurasi sudo, real-time SIEM monitoring, server hardening berkala.
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- DAMPAK RISIKO -->
-      <span class="modal-section-label">Dampak Risiko</span>
-      <div class="modal-desc">
-        Jika serangan tidak terdeteksi, attacker berpotensi mengambil alih kendali penuh server,
-        mengakses atau mencuri data sensitif, menyisipkan malware atau backdoor, dan
-        menyalahgunakan sumber daya sistem. Kompromi server publik juga dapat menyebabkan
-        kerusakan reputasi organisasi serta gangguan operasional yang signifikan.
-      </div>
-
-      <span class="modal-section-label">Tools &amp; Environment</span>
-      <div class="modal-tools">
-        <span class="tool-tag">Wazuh SIEM</span>
-        <span class="tool-tag">Linux Command Line</span>
-        <span class="tool-tag">Log Analysis</span>
-        <span class="tool-tag">Threat Hunting</span>
-        <span class="tool-tag">Digital Forensics</span>
-        <span class="tool-tag">Public Linux Server (Lab)</span>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════
-     ATTACK TIMELINE
-════════════════════════════════════ -->
-<section id="timeline">
-  <div class="timeline-inner">
-    <div class="section-header">
-      <span class="section-num">04</span>
-      <h2 class="section-title">Attack Timeline</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="timeline-list">
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">4 Maret 2025 — 12:04 UTC</div>
-        <div class="tl-event">Aktivitas Brute Force SSH Pertama Terdeteksi</div>
-        <div class="tl-desc">Ratusan percobaan login SSH gagal dari IP 180.243.121.188 terdeteksi melalui auth.log</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">6 Maret 2025 — 13:29 UTC</div>
-        <div class="tl-event">Login Berhasil sebagai User Analyst (Akses Awal)</div>
-        <div class="tl-desc">Attacker berhasil memperoleh akses awal sebagai user analyst dari IP eksternal</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">6 Maret 2025 — 16:31 UTC</div>
-        <div class="tl-event">Login Berhasil sebagai Root — Sistem Terkompromi Penuh</div>
-        <div class="tl-desc">Attacker berhasil login langsung sebagai root, sistem terkompromi sepenuhnya</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">7 Maret 2025 — 02:39 UTC</div>
-        <div class="tl-event">Aktivitas Login Root Berulang — Indikasi Persistence</div>
-        <div class="tl-desc">Aktivitas autentikasi root berulang mengindikasikan attacker mempertahankan akses ke sistem</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">7 Maret 2025 — 03:15 UTC</div>
-        <div class="tl-event">Percobaan Privilege Escalation (www-data → root)</div>
-        <div class="tl-desc">User www-data mencoba eskalasi hak akses ke root via sudo dan akses /etc/shadow</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">7 Maret 2025 — 07:30 UTC</div>
-        <div class="tl-event">Rekonstruksi Timeline via Wazuh SIEM</div>
-        <div class="tl-desc">742 total alerts · 597 authentication failures · 5 authentication successes</div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══════════════════════════════════
-     SECURITY RECOMMENDATIONS
-════════════════════════════════════ -->
-<section id="recommendations">
-  <div class="section-header">
-    <span class="section-num">05</span>
-    <h2 class="section-title">Security Recommendations</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="rec-grid">
-    <div class="rec-item"><div class="rec-icon">🛡️</div><div class="rec-text">Meningkatkan kontrol keamanan aplikasi melalui penerapan prepared statements dan validasi input yang ketat untuk mencegah SQL Injection.</div></div>
-    <div class="rec-item"><div class="rec-icon">🔐</div><div class="rec-text">Mengamankan kredensial sensitif dengan environment variables dan hashing — jangan hardcode di source code atau repository publik.</div></div>
-    <div class="rec-item"><div class="rec-icon">🔒</div><div class="rec-text">Memastikan seluruh komunikasi aplikasi menggunakan koneksi terenkripsi (HTTPS/TLS) untuk mencegah kebocoran data.</div></div>
-    <div class="rec-item"><div class="rec-icon">🔑</div><div class="rec-text">Memperkuat autentikasi SSH dengan key-based authentication. Nonaktifkan login root langsung dan password-based login.</div></div>
-    <div class="rec-item"><div class="rec-icon">🚫</div><div class="rec-text">Implementasi fail2ban dan pembatasan percobaan login otomatis untuk mencegah serangan brute force pada SSH dan web aplikasi.</div></div>
-    <div class="rec-item"><div class="rec-icon">📊</div><div class="rec-text">Monitoring log real-time menggunakan SIEM dan audit keamanan berkala melalui vulnerability assessment dan penetration testing.</div></div>
-  </div>
-</section>
+  <!-- ============ CONTACT SECTION ============ -->
+  <section class="section contact-section" id="contact">
+    <div class="section-label">// 03. CONTACT</div>
+    <h2 class="section-title center">GET IN <span class="accent">TOUCH</span></h2>
+    <p class="section-subtitle center">Open to opportunities in penetration testing, SOC analysis, and cybersecurity roles.</p>
 
-<!-- ═══════════════════════════════════
-     CONTACT
-════════════════════════════════════ -->
-<section id="contact">
-  <div class="contact-inner">
-    <div class="section-header" style="justify-content:center;max-width:600px;margin:0 auto 16px;">
-      <span class="section-num">06</span>
-      <h2 class="section-title">Get In Touch</h2>
-      <div class="section-line"></div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <span class="contact-icon">✉</span>
+        <span class="contact-label">EMAIL</span>
+        <a href="mailto:billyzefanya2006@icloud.com" class="contact-value">billyzefanya2006@icloud.com</a>
+      </div>
+      <div class="contact-card">
+        <span class="contact-icon">☎</span>
+        <span class="contact-label">PHONE</span>
+        <a href="tel:+6282346869652" class="contact-value">+62 823-4686-9652</a>
+      </div>
+      <div class="contact-card">
+        <span class="contact-icon">in</span>
+        <span class="contact-label">LINKEDIN</span>
+        <a href="https://www.linkedin.com/in/billyzefanya" target="_blank" class="contact-value">linkedin.com/in/billyzefanya</a>
+      </div>
     </div>
-    <p class="contact-sub">OPEN FOR OPPORTUNITIES &amp; COLLABORATION</p>
-    <div class="contact-cards">
-      <a href="mailto:billyzefanya2006@icloud.com" class="contact-card">
-        <div class="contact-card-label">Email</div>
-        <div class="contact-card-value">billyzefanya2006@icloud.com</div>
-      </a>
-      <a href="tel:+6282346869652" class="contact-card">
-        <div class="contact-card-label">Phone</div>
-        <div class="contact-card-value">+62 823-4686-9652</div>
-      </a>
-      <a href="https://www.linkedin.com/in/billyzefanya/" target="_blank" class="contact-card">
-        <div class="contact-card-label">LinkedIn</div>
-        <div class="contact-card-value">linkedin/billyzefanya</div>
-      </a>
+
+    <div class="availability-banner">
+      <span class="avail-dot"></span>
+      <span>AVAILABLE FOR INTERNSHIP & JUNIOR SECURITY ROLES</span>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <div class="footer-logo">Billy Zefanya © 2025</div>
-  <div class="footer-copy">Billy Zefanya — Cybersecurity Portfolio</div>
-</footer>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-line">
+      <span class="footer-name">Billy Zefanya</span>
+      <span class="footer-copy">© 2026 — Cybersecurity Portfolio</span>
+      <span class="footer-built">Built with precision. Not with luck.</span>
+    </div>
+  </footer>
 
-<script src="main.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
