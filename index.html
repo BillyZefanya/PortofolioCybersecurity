@@ -98,7 +98,7 @@
 
   <!-- ============ ABOUT SECTION ============ -->
   <section class="section about-section" id="about">
-    <div class="section-label">// 01. ABOUT</div>
+    <div class="section-label">01. ABOUT</div>
     <div class="about-grid">
       <div class="about-photo-col">
         <div class="photo-frame">
@@ -169,7 +169,7 @@
 
   <!-- ============ PROJECTS SECTION ============ -->
   <section class="section projects-section" id="projects">
-    <div class="section-label">// 02. PROJECTS</div>
+    <div class="section-label">02. PROJECTS</div>
     <h2 class="section-title center">OPERATIONAL <span class="accent">REPORTS</span></h2>
     <p class="section-subtitle center">Select a team role above, or use the tabs below to navigate.</p>
 
@@ -189,7 +189,7 @@
         <div class="phc-badge">PROJECT 01</div>
         <div class="phc-info">
           <h3>Web Application Penetration Testing</h3>
-          <p>Black-box + Grey-box assessment of Dibimbing Shop e-commerce platform using OWASP WSTG methodology. Identified and documented critical vulnerabilities with full proof-of-concept exploitation.</p>
+          <p>Penetration test conducted on <strong>Dibimbing Shop</strong> — a web application provided by the bootcamp as a lab environment. Assessed the full attack surface using OWASP WSTG methodology across user and admin features, uncovering critical and high-severity vulnerabilities with documented proof-of-concept exploits.</p>
         </div>
         <div class="phc-meta">
           <span class="meta-tag">OWASP WSTG</span>
@@ -214,7 +214,7 @@
                 <span class="e-dot red-e"></span>
                 <span class="e-title">WAPT-01 :: Proof of Concept</span>
               </div>
-              <img src="p1-sqli.jpg"SQL Injection PoC" class="evidence-img" onerror="this.parentElement.innerHTML+='<div class=\'img-placeholder\'><span>[ Ganti RED_TEAM_SQLI_SCREENSHOT.png ]</span></div>'; this.style.display=\'none\'" />
+              <img src="p1-sqli.jpg" alt="SQL Injection PoC" class="evidence-img" onerror="this.parentElement.innerHTML+='<div class=\'img-placeholder\'><span>[ Ganti RED_TEAM_SQLI_SCREENSHOT.png ]</span></div>'; this.style.display=\'none\'" />
             </div>
           </div>
           <div class="finding-remediation">
@@ -328,51 +328,12 @@
         <div class="phc-badge blue-badge">PROJECT 02</div>
         <div class="phc-info">
           <h3>Security Incident Analysis & Threat Hunting</h3>
-          <p>Blue Team investigation of a compromised Linux server using Wazuh SIEM. Reconstructed full attack timeline from SSH brute force to privilege escalation, with correlated log evidence and actionable remediation.</p>
+          <p>Blue Team investigation of a compromised Linux server using Wazuh SIEM. Correlated SSH authentication logs and SIEM alerts to identify brute force activity, unauthorized access, and privilege escalation — with full evidence and actionable remediation.</p>
         </div>
         <div class="phc-meta">
           <span class="meta-tag blue-meta">Wazuh SIEM</span>
           <span class="meta-tag blue-meta">Blue Team</span>
           <span class="meta-tag blue-meta">Threat Hunting</span>
-        </div>
-      </div>
-
-      <!-- ATTACK TIMELINE -->
-      <div class="timeline-section">
-        <h4 class="subsection-title"><span class="accent2">// ATTACK TIMELINE</span></h4>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="tl-date">2 Mar 2026 — 09:23</div>
-            <div class="tl-dot blue-dot"></div>
-            <div class="tl-content">
-              <span class="tl-badge">PRIVILEGE ESC</span>
-              <p>Privilege escalation attempt by user <code>www-data</code>. Unauthorized sudo command triggered.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="tl-date">2 Mar 2026 — 09:38</div>
-            <div class="tl-dot blue-dot"></div>
-            <div class="tl-content">
-              <span class="tl-badge">FILE ACCESS</span>
-              <p>Attempted access to sensitive file <code>/etc/shadow</code> from <code>www-data</code> process.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="tl-date">5 Mar 2026</div>
-            <div class="tl-dot orange-dot"></div>
-            <div class="tl-content">
-              <span class="tl-badge alert-badge">BRUTE FORCE</span>
-              <p>Automated SSH brute force attack detected from external IP <code>180.243.121.188</code>. Hundreds of failed login attempts in rapid succession.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="tl-date">6 Mar 2026</div>
-            <div class="tl-dot red-dot"></div>
-            <div class="tl-content">
-              <span class="tl-badge danger-badge">COMPROMISED</span>
-              <p>SSH login succeeded from malicious IP. Attacker gained initial access on limited account <code>analyst</code>, followed by successful root authentication.</p>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -437,7 +398,7 @@
                 <span class="e-dot red-e"></span>
                 <span class="e-title">IR-03 :: Root Access Log</span>
               </div>
-              <img src="p2-root.jpg"Privilege Escalation Evidence" class="evidence-img" onerror="this.parentElement.innerHTML+='<div class=\'img-placeholder\'><span>[ Ganti BLUE_TEAM_PRIVESC_SCREENSHOT.png ]</span></div>'; this.style.display=\'none\'" />
+              <img src="p2-root.jpg" alt="Privilege Escalation Evidence" class="evidence-img" onerror="this.parentElement.innerHTML+='<div class=\'img-placeholder\'><span>[ Ganti BLUE_TEAM_PRIVESC_SCREENSHOT.png ]</span></div>'; this.style.display=\'none\'" />
             </div>
           </div>
           <div class="finding-remediation blue-rem">
@@ -501,7 +462,7 @@
 
   <!-- ============ CONTACT SECTION ============ -->
   <section class="section contact-section" id="contact">
-    <div class="section-label">// 03. CONTACT</div>
+    <div class="section-label">03. CONTACT</div>
     <h2 class="section-title center">GET IN <span class="accent">TOUCH</span></h2>
     <p class="section-subtitle center">Open to opportunities in penetration testing, SOC analysis, and cybersecurity roles.</p>
 

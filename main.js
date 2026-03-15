@@ -172,11 +172,9 @@ function applyScrollReveal() {
     '.skills-block',
     '.project-header-card',
     '.finding-card',
-    '.timeline-item',
     '.summary-card',
     '.contact-card',
     '.availability-banner',
-    '.timeline-section',
     '.project-tabs'
   ];
 
